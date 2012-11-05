@@ -37,6 +37,7 @@
 #include <linux/vmalloc.h>
 #include <linux/slab.h>
 #include <linux/pid_namespace.h>
+#include <linux/ratelimit.h>
 #include <linux/security.h>
 
 #ifdef CONFIG_ANDROID_BINDER_IPC_32BIT
