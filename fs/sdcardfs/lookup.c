@@ -253,6 +253,9 @@ static int sdcardfs_name_match(void *__buf, const char *name, int namelen,
 static struct dentry *__sdcardfs_lookup(struct dentry *dentry,
 		unsigned int flags, struct path *lower_parent_path, userid_t id)
 {
+static struct dentry *__sdcardfs_lookup(struct dentry *dentry,
+		unsigned int flags, struct path *lower_parent_path, userid_t id)
+{
 	int err = 0;
 	struct vfsmount *lower_dir_mnt;
 	struct dentry *lower_dir_dentry = NULL;
@@ -374,6 +377,8 @@ put_name:
 	lower_dentry = d_hash_and_lookup(lower_dir_dentry, &dname);
 	if (IS_ERR(lower_dentry))
 		return lower_dentry;
+
+	lower_dentry = d_alloc(lower_dir_dentry, &dname);
 	if (!lower_dentry) {
 		/* We called vfs_path_lookup earlier, and did not get a negative
 		 * dentry then. Don't confuse the lower filesystem by forcing
