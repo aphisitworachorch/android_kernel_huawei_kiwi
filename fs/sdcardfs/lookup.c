@@ -366,7 +366,6 @@ put_name:
 	/* instatiate a new negative dentry */
 	dname.name = name->name;
 	dname.len = name->len;
-<<<<<<< HEAD
 
 	/* See if the low-level filesystem might want
 	 * to use its own hash
@@ -374,14 +373,6 @@ put_name:
 	lower_dentry = d_hash_and_lookup(lower_dir_dentry, &dname);
 	if (IS_ERR(lower_dentry))
 		return lower_dentry;
-=======
-	dname.hash = full_name_hash(dname.name, dname.len);
-	lower_dentry = d_lookup(lower_dir_dentry, &dname);
-	if (lower_dentry)
-		goto setup_lower;
-
-	lower_dentry = d_alloc(lower_dir_dentry, &dname);
->>>>>>> 3005ada53bca... ANDROID: sdcardfs: Fix incorrect hash
 	if (!lower_dentry) {
 		/* We called vfs_path_lookup earlier, and did not get a negative
 		 * dentry then. Don't confuse the lower filesystem by forcing
