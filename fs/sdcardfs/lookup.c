@@ -250,9 +250,7 @@ static int sdcardfs_name_match(void *__buf, const char *name, int namelen,
  * Returns: NULL (ok), ERR_PTR if an error occurred.
  * Fills in lower_parent_path with <dentry,mnt> on success.
  */
-static struct dentry *__sdcardfs_lookup(struct dentry *dentry,
-		unsigned int flags, struct path *lower_parent_path, userid_t id)
-{
+
 static struct dentry *__sdcardfs_lookup(struct dentry *dentry,
 		unsigned int flags, struct path *lower_parent_path, userid_t id)
 {
