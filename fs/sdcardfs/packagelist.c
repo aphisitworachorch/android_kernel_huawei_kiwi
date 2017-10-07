@@ -102,7 +102,11 @@ static appid_t __get_ext_gid(const struct qstr *key)
 	appid_t ret_id;
 
 	rcu_read_lock();
+<<<<<<< HEAD
+	hash_for_each_possible_rcu(ext_to_groupid, hash_cur, hlist, hash) {
+=======
 	hash_for_each_possible_rcu_new(ext_to_groupid, hash_cur, hlist, hash) {
+>>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 		if (qstr_case_eq(key, &hash_cur->key)) {
 			ret_id = atomic_read(&hash_cur->value);
 			rcu_read_unlock();
@@ -128,11 +132,7 @@ static appid_t __is_excluded(const struct qstr *app_name, userid_t user)
 
 	rcu_read_lock();
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_possible_rcu(package_to_userid, hash_cur, hlist, hash) {
-=======
-	hash_for_each_possible_rcu_new(package_to_userid, hash_cur, hlist, hash) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hash_for_each_possible_rcu_new(package_to_userid, hash_cur, hlist, hash) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -209,11 +209,7 @@ static int insert_packagelist_appid_entry_locked(const struct qstr *key, appid_t
 	unsigned int hash = key->hash;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_possible_rcu(package_to_appid, hash_cur, hlist, hash) {
-=======
-	hash_for_each_possible_rcu_new(package_to_appid, hash_cur, hlist, hash) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hash_for_each_possible_rcu_new(package_to_appid, hash_cur, hlist, hash) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -237,11 +233,7 @@ static int insert_ext_gid_entry_locked(const struct qstr *key, appid_t value)
 
 	/* An extension can only belong to one gid */
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_possible_rcu(ext_to_groupid, hash_cur, hlist, hash) {
-=======
-	hash_for_each_possible_rcu_new(ext_to_groupid, hash_cur, hlist, hash) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hash_for_each_possible_rcu_new(ext_to_groupid, hash_cur, hlist, hash) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -263,11 +255,7 @@ static int insert_userid_exclude_entry_locked(const struct qstr *key, userid_t v
 
 	/* Only insert if not already present */
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_possible_rcu(package_to_userid, hash_cur, hlist, hash) {
-=======
-	hash_for_each_possible_rcu_new(package_to_userid, hash_cur, hlist, hash) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hash_for_each_possible_rcu_new(package_to_userid, hash_cur, hlist, hash) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -373,11 +361,7 @@ static void remove_packagelist_entry_locked(const struct qstr *key)
 	HLIST_HEAD(free_list);
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_possible_rcu(package_to_userid, hash_cur, hlist, hash) {
-=======
-	hash_for_each_possible_rcu_new(package_to_userid, hash_cur, hlist, hash) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hash_for_each_possible_rcu_new(package_to_userid, hash_cur, hlist, hash) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -387,11 +371,7 @@ static void remove_packagelist_entry_locked(const struct qstr *key)
 		}
 	}
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_possible_rcu(package_to_appid, hash_cur, hlist, hash) {
-=======
-	hash_for_each_possible_rcu_new(package_to_appid, hash_cur, hlist, hash) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hash_for_each_possible_rcu_new(package_to_appid, hash_cur, hlist, hash) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -403,11 +383,7 @@ static void remove_packagelist_entry_locked(const struct qstr *key)
 	}
 	synchronize_rcu();
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hlist_for_each_entry_safe(hash_cur, h_t, &free_list, dlist)
-=======
-	hlist_for_each_entry_safe_new(hash_cur, h_t, &free_list, dlist)
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hlist_for_each_entry_safe_new(hash_cur, h_t, &free_list, dlist)
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -428,11 +404,7 @@ static void remove_ext_gid_entry_locked(const struct qstr *key, gid_t group)
 	unsigned int hash = key->hash;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_possible_rcu(ext_to_groupid, hash_cur, hlist, hash) {
-=======
-	hash_for_each_possible_rcu_new(ext_to_groupid, hash_cur, hlist, hash) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hash_for_each_possible_rcu_new(ext_to_groupid, hash_cur, hlist, hash) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -460,11 +432,7 @@ static void remove_userid_all_entry_locked(userid_t userid)
 	int i;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_rcu(package_to_userid, i, hash_cur, hlist) {
-=======
-	hash_for_each_rcu_new(package_to_userid, i, hash_cur, hlist) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hash_for_each_rcu_new(package_to_userid, i, hash_cur, hlist) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -475,11 +443,7 @@ static void remove_userid_all_entry_locked(userid_t userid)
 	}
 	synchronize_rcu();
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hlist_for_each_entry_safe(hash_cur, h_t, &free_list, dlist) {
-=======
-	hlist_for_each_entry_safe_new(hash_cur, h_t, &free_list, dlist) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hlist_for_each_entry_safe_new(hash_cur, h_t, &free_list, dlist) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -501,11 +465,7 @@ static void remove_userid_exclude_entry_locked(const struct qstr *key, userid_t 
 	unsigned int hash = key->hash;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_possible_rcu(package_to_userid, hash_cur, hlist, hash) {
-=======
-	hash_for_each_possible_rcu_new(package_to_userid, hash_cur, hlist, hash) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hash_for_each_possible_rcu_new(package_to_userid, hash_cur, hlist, hash) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -536,7 +496,6 @@ static void packagelist_destroy(void)
 
 	mutex_lock(&sdcardfs_super_list_lock);
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_rcu(package_to_appid, i, hash_cur, hlist) {
 		hash_del_rcu(&hash_cur->hlist);
 		hlist_add_head(&hash_cur->dlist, &free_list);
@@ -549,23 +508,12 @@ static void packagelist_destroy(void)
 	}
 	hash_for_each_rcu_new(package_to_userid, i, hash_cur, hlist) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
-=======
-	hash_for_each_rcu_new(package_to_appid, i, hash_cur, hlist) {
-		hash_del_rcu(&hash_cur->hlist);
-		hlist_add_head(&hash_cur->dlist, &free_list);
-	}
-	hash_for_each_rcu_new(package_to_userid, i, hash_cur, hlist) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 		hash_del_rcu(&hash_cur->hlist);
 		hlist_add_head(&hash_cur->dlist, &free_list);
 	}
 	synchronize_rcu();
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hlist_for_each_entry_safe(hash_cur, h_t, &free_list, dlist)
-=======
-	hlist_for_each_entry_safe_new(hash_cur, h_t, &free_list, dlist)
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hlist_for_each_entry_safe_new(hash_cur, h_t, &free_list, dlist)
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -622,11 +570,7 @@ static ssize_t package_details_excluded_userids_show(struct package_details *pac
 
 	rcu_read_lock();
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_possible_rcu(package_to_userid, hash_cur, hlist, hash) {
-=======
-	hash_for_each_possible_rcu_new(package_to_userid, hash_cur, hlist, hash) {
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 =======
 	hash_for_each_possible_rcu_new(package_to_userid, hash_cur, hlist, hash) {
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
@@ -879,23 +823,17 @@ static ssize_t packages_list_show(struct packages *packages,
 
 	rcu_read_lock();
 <<<<<<< HEAD
-<<<<<<< HEAD
 	hash_for_each_rcu(package_to_appid, i, hash_cur_app, hlist) {
 		written = scnprintf(page + count, PAGE_SIZE - sizeof(errormsg) - count, "%s %d\n",
 					hash_cur_app->key.name, atomic_read(&hash_cur_app->value));
 		hash = hash_cur_app->key.hash;
 		hash_for_each_possible_rcu(package_to_userid, hash_cur_user, hlist, hash) {
 =======
-=======
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 	hash_for_each_rcu_new(package_to_appid, i, hash_cur_app, hlist) {
 		written = scnprintf(page + count, PAGE_SIZE - sizeof(errormsg) - count, "%s %d\n",
 					hash_cur_app->key.name, atomic_read(&hash_cur_app->value));
 		hash = hash_cur_app->key.hash;
 		hash_for_each_possible_rcu_new(package_to_userid, hash_cur_user, hlist, hash) {
-<<<<<<< HEAD
->>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
-=======
 >>>>>>> e675a50f40a2f... sdcardfs: Backport and use some 3.10 hlist/hash macros
 			if (qstr_case_eq(&hash_cur_app->key, &hash_cur_user->key)) {
 				written += scnprintf(page + count + written - 1,
