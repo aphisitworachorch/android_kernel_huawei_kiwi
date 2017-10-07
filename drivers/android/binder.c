@@ -2807,7 +2807,6 @@ retry:
 #if defined(VENDOR_EDIT) && defined(CONFIG_CGROUP_SCHED)
 	skip_cfs_throttle(0);
 #endif
->>>>>>> 1b7b62a131e9a... android: binder: move global binder state into context struct.
 
 	trace_binder_wait_for_work(wait_for_proc_work,
 				   !!thread->transaction_stack,
@@ -3398,6 +3397,8 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		thread = NULL;
 		break;
 	case BINDER_VERSION:
+		struct binder_version __user *ver = ubuf;
+		
 		if (size != sizeof(struct binder_version)) {
 			ret = -EINVAL;
 			goto err;
